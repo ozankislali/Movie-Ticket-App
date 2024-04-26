@@ -3,6 +3,7 @@ import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
 import TicketScreen from "../screens/TicketScreen";
 import UserAccountScreen from "../screens/UserAccountScreen";
+import MovieDetailsScreen from "../screens/MovieDetailsScreen";
 import { COLORS, FONTSIZE, SPACING } from '../theme/theme';
 import CustomIcon from "../components/CustomIcon";
 import { StyleSheet, View } from "react-native";
@@ -103,6 +104,7 @@ const TabNavigator = () => {
                     },
                 }}
             />
+            
         </Tab.Navigator>
     );
 };
