@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     fontSize:FONTSIZE.size_14,
     color:COLORS.White,
   },
-  searhIcon:{
+  searchIcon:{
     alignItems:'center',
     justifyContent:'center',
     padding:SPACING.space_16
