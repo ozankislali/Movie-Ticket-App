@@ -1,48 +1,64 @@
-import * as React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { COLORS } from '../theme/theme';
+import React,{useState} from 'react';
+import { Text, View, StyleSheet, TouchableOpacity,Dimensions,ActivityIndicator,ScrollView,StatusBar } from 'react-native';
+import { COLORS, SPACING } from '../theme/theme';
+import { upcomingMovies,nowPlayingMovies,popularMovies,baseImagePath } from '../api/apicalls';
+import InputHeader from '../components/InputHeader';
 
+const {width,height}=Dimensions.get('window')
 
 const HomeScreen = ({ navigation }: any) => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity 
-          onPress={() => {
-            navigation.push('MovieDetails');
-          }}
-        >
-          <Text style={styles.headerText}>HomeScreen</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.content}>
-        <Text>Content Area</Text>
-      </View>
+  const [nowPlayingMoviesList, setNowPlayingMoviesList]=useState <any> (undefined);
+  const [popularMoviesList, setPopularMoviesList]=useState <any> (undefined);
+  const [upcomingMoviesList, setUpcomigMovieList]=useState <any> (undefined);
+
+  if(
+    nowPlayingMoviesList == undefined && 
+    nowPlayingMoviesList == null && 
+    popularMoviesList==undefined && 
+    popularMoviesList ==null && 
+    upcomingMoviesList == undefined && 
+    upcomingMoviesList==null ){
+
+    return <ScrollView style={styles.container} 
+    bounces={false} 
+    contentContainerStyle={styles.scrollViewContainer}>
+    <StatusBar hidden />
+    
+    <View style={styles.InputHeaderContainer}>
+      <InputHeader/>
     </View>
-  );
+
+
+    <View style={styles.loadingContainer}>
+      <ActivityIndicator size={'large'} color={COLORS.Orange} />
+    </View>
+
+    </ScrollView>
+  }
+
+
+  return <View style={styles.container}></View>
 };
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: COLORS.White,
-  },
-  header: {
+    display:'flex',
     backgroundColor: COLORS.Black,
-    paddingTop: 40,
-    paddingLeft: 10,
-    paddingBottom: 10,
   },
-  headerText: {
-    color: COLORS.White,
-    fontSize: 20,
+  scrollViewContainer:{
+    flex:1,
   },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  loadingContainer:{
+    flex:1,
+    alignSelf:'center',
+    justifyContent:'center',
   },
+  InputHeaderContainer:{
+    marginHorizontal:SPACING.space_36,
+    marginTop:SPACING.space_28,
+
+  }
 });
 
 export default HomeScreen;
