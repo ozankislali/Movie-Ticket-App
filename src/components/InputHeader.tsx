@@ -11,7 +11,7 @@ import CustomIcon from './CustomIcon';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-const InputHeader = () => {
+const InputHeader = (props:any) => {
     const [searchText, setSearchText]=useState <string> ('');
 
   return (
@@ -19,10 +19,12 @@ const InputHeader = () => {
         <TextInput 
         style={styles.textInput} 
         onChangeText={TextInput=>setSearchText(TextInput)}
+        value={searchText}
         placeholder='Search your Movies...'
         placeholderTextColor={COLORS.WhiteRGBA32} 
          />
-        <TouchableOpacity style={styles.searchIcon}>
+        <TouchableOpacity style={styles.searchIcon}
+        onPress={() => props.searchFunction(searchText)}>
             <MaterialCommunityIcons 
             name="magnify" 
             color={COLORS.Orange} 
