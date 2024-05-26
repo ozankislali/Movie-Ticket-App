@@ -128,7 +128,7 @@ const HomeScreen = ({ navigation }: any) => {
           isFirst={index == 0 ? true : false}
           isLast={index == upcomingMoviesList?.length - 1 ? true : false}
           title={item.original_title} 
-          imagePath={baseImagePath ('w32',item.poster_path)}
+          imagePath={baseImagePath ('w342',item.poster_path)}
         />
       )}
       />

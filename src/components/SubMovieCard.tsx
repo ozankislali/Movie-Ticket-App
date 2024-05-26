@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { BORDERRADIUS, COLORS, SPACING } from '../theme/theme';
+import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING } from '../theme/theme';
 
 const SubMovieCard = (props:any) => {
   return (
@@ -22,7 +22,7 @@ const SubMovieCard = (props:any) => {
           style={[styles.cardImage,{width:props.cardWith,}]}
           source={{uri: props.imagePath}} 
         />
-        <Text>{props.title}</Text>
+        <Text numberOfLines={1} style={styles.textTitle}>{props.title}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -37,6 +37,13 @@ const styles = StyleSheet.create({
   cardImage:{
     aspectRatio:2/3,
     borderRadius:BORDERRADIUS.radius_20,
+  },
+  textTitle:{
+    fontFamily:FONTFAMILY.poppins_regular,
+    fontSize:FONTSIZE.size_14,
+    color:COLORS.White,
+    textAlign:'center',
+    paddingVertical:SPACING.space_10,
   },
 });
 
