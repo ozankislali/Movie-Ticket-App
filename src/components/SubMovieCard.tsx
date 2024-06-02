@@ -4,24 +4,24 @@ import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING } from '../theme/th
 
 const SubMovieCard = (props:any) => {
   return (
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => props.cardFunction()}>
         <View 
-        style={[
-          styles.container,
-          props.shoudlMarginatedAtEnd
-            ? props.isFirst
-              ? {marginLeft:SPACING.space_36}
-              : props.isLast
-              ? {marginRight:SPACING.space_36}
-              : {}
-            : {},
-          props.shoudlMarginatedAround ? {margin:SPACING.space_12} : {},
-          {maxWidth: props.cardWith},
-        ]}>
-        <Image 
-          style={[styles.cardImage,{width:props.cardWith,}]}
-          source={{uri: props.imagePath}} 
-        />
+          style={[
+            styles.container,
+            props.shoudlMarginatedAtEnd
+             ? props.isFirst
+                ? {marginLeft:SPACING.space_36}
+                : props.isLast
+                ? {marginRight:SPACING.space_36}
+                : {}
+              : {},
+            props.shoudlMarginatedAround ? {margin:SPACING.space_12} : {},
+            {maxWidth: props.cardWith},
+          ]}>
+          <Image 
+            style={[styles.cardImage, {width:props.cardWith,}]}
+            source={{uri: props.imagePath}} 
+          />
         <Text numberOfLines={1} style={styles.textTitle}>{props.title}</Text>
       </View>
     </TouchableOpacity>
@@ -31,11 +31,11 @@ const SubMovieCard = (props:any) => {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    flex: 1,
+    flex:1,
     backgroundColor: COLORS.Black,
   },
   cardImage:{
-    aspectRatio:2/3,
+    aspectRatio: 2 / 3,
     borderRadius:BORDERRADIUS.radius_20,
   },
   textTitle:{
