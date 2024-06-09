@@ -15,7 +15,7 @@ const SubMovieCard = (props:any) => {
                 ? {marginRight:SPACING.space_36}
                 : {}
               : {},
-            props.shoudlMarginatedAround ? {margin:SPACING.space_12} : {},
+            props.shouldMarginatedAround ? {margin:SPACING.space_12} : {},
             {maxWidth: props.cardWith},
           ]}>
           <Image 

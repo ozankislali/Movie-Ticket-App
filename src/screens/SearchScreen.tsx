@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Dimensions, StatusBar } from 'react-native';
-import { COLORS } from '../theme/theme';
-import { searchMovies } from '../api/apicalls';
+import { Text, View, StyleSheet, Dimensions, StatusBar, FlatList } from 'react-native';
+import { COLORS, SPACING } from '../theme/theme';
+import { baseImagePath, searchMovies } from '../api/apicalls';
 import InputHeader from '../components/InputHeader';
+import SubMovieCard from '../components/SubMovieCard';
 
 
 const { width, height } = Dimensions.get('screen');
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}:any) => {
 
   const [searchList, setSearchList] = useState([]);
 
@@ -17,7 +18,7 @@ const SearchScreen = () => {
       let json = await response.json();
       setSearchList(json.results);
     } catch (error) {
-      console.error("Something went wrong in searchMoviesFunction ");
+      console.error("Something went wrong in searchMoviesFunction",error);
     }
   };
 
@@ -31,22 +32,21 @@ const SearchScreen = () => {
           data={searchList}
           keyExtractor={(item: any) => item.id}
           bounces={false}
-          numColums={2}
+          numColumns={2}
           ListHeaderComponent={
             <View style={styles.InputHeaderContainer}>
               <InputHeader searchFunction={searchMoviesFunction} />
             </View>
           }
-          contentContainerStyle={styles.containerGap36}
+          contentContainerStyle={styles.centerContainer}
           renderItem={({ item, index }) => (
             <SubMovieCard
-              shoudlMarginatedAtEnd={true}
+              shoudlMarginatedAtEnd={false}
+              shouldMarginatedAround={true}
               cardFunction={() => {
                 navigation.push('MovieDetails', { movieid: item.id });
               }}
-              cardWith={width / 3}
-              isFirst={index == 0 ? true : false}
-              isLast={index == upcomingMoviesList?.length - 1 ? true : false}
+              cardWith={width /2 - SPACING.space_12*2}
               title={item.original_title}
               imagePath={baseImagePath('w342', item.poster_path)}
             />
@@ -66,6 +66,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.Black,
   },
+  InputHeaderContainer: {
+    display:'flex',
+    marginHorizontal: SPACING.space_36,
+    marginTop: SPACING.space_28,
+    marginBottom:SPACING.space_28 - SPACING.space_12,
+  },
+  centerContainer:{
+    alignItems:'center'
+  }
 });
 
 export default SearchScreen;

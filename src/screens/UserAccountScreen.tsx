@@ -1,13 +1,54 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { COLORS } from '../theme/theme';
+import {Text, View, StyleSheet, StatusBar, Image} from 'react-native';
+import {COLORS, FONTFAMILY, FONTSIZE, SPACING} from '../theme/theme';
+import AppHeader from '../components/AppHeader';
+import SettingComponent from '../components/SettingComponent';
 
-const UserAccountScreen = () => {
+const UserAccountScreen = ({navigation}: any) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>UserAccountScreen</Text>
-      <View style={styles.content}>
-        <Text>Content Area</Text>
+      <StatusBar hidden />
+      <View style={styles.appHeaderContainer}>
+        <AppHeader
+          name="close"
+          header={'My Profile'}
+          action={() => navigation.goBack()}
+        />
+      </View>
+
+      <View style={styles.profileContainer}>
+        <Image
+          source={require('../assets/image/avatar1.png')}
+          style={styles.avatarImage}
+        />
+        <Text style={styles.avatarText}>Ozan Kışlalı</Text>
+      </View>
+
+      <View style={styles.profileContainer}>
+        <SettingComponent
+          icon="user"
+          heading="Account"
+          subheading="Edit Profile"
+          subtitle="Change Password"
+        />
+        <SettingComponent
+          icon="setting"
+          heading="Settings"
+          subheading="Theme"
+          subtitle="Permissions"
+        />
+        <SettingComponent
+          icon="dollar"
+          heading="Offers & Refferrals"
+          subheading="Offer"
+          subtitle="Refferrals"
+        />
+        <SettingComponent
+          icon="info"
+          heading="About"
+          subheading="About Movies"
+          subtitle="more"
+        />
       </View>
     </View>
   );
@@ -15,19 +56,28 @@ const UserAccountScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
     flex: 1,
-    backgroundColor: COLORS.White,
-    paddingTop: 40,
-    paddingLeft: 10,
+    backgroundColor: COLORS.Black,
   },
-  headerText: {
-    color: COLORS.Black,
-    fontSize: 20,
+  appHeaderContainer: {
+    marginHorizontal: SPACING.space_36,
+    marginTop: SPACING.space_20 * 2,
   },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
+  profileContainer: {
     alignItems: 'center',
+    padding: SPACING.space_36,
+  },
+  avatarImage: {
+    height: 80,
+    width: 80,
+    borderRadius: 80,
+  },
+  avatarText: {
+    fontFamily: FONTFAMILY.poppins_medium,
+    fontSize: FONTSIZE.size_16,
+    marginTop: SPACING.space_16,
+    color: COLORS.White,
   },
 });
 
